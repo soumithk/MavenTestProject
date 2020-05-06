@@ -18,5 +18,5 @@ RUN mvn install
 # package
 FROM openjdk:11-jre
 
-COPY --from=builder /target/Calculator-1.0-SNAPSHOT.jar /calculator/Calculator-1.0-SNAPSHOT.jar
+COPY --from=builder /MavenTestProject/target/Calculator-1.0-SNAPSHOT.jar /calculator/Calculator-1.0-SNAPSHOT.jar
 CMD java -cp /calculator/Calculator-1.0-SNAPSHOT.jar com.calculator.Calculator
