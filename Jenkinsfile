@@ -5,7 +5,7 @@ pipeline {
       agent {
         docker {
           image 'maven:3.6.3-jdk-11'
-          args '-v /root/.m2:/root/.m2' 
+          args '-v /root/.m2:/root/.m2'
         }
       }
       stages {
@@ -32,10 +32,20 @@ pipeline {
         steps {
           withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable:'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
             sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-            sh 'docker tag calculator soumithk/calculator:1.0'
+            sh 'docker tag calculator:1.0 soumithk/calculator:1.0'
             sh 'docker push soumithk/calculator:1.0'
-          } 
+          }
         }
+    }
+    stage('Deploy - rundeck') {
+      agent any
+      steps {
+        script {
+          step([$class: "RundeckNotifier",
+          rundeckInstance: "rundeck",
+          jobId: "e93463da-66f6-4d64-9b0a-fa2806e6ebe8"])
+        }
+      }
     }
   }
 }
