@@ -12,11 +12,12 @@ public class Calculator {
 
 		while(true) {
 			System.out.println("Choose what to do :");
-			System.out.println("1 - Addition\n2 - Subtraction\n0 - Exit");
-			System.out.println("Please choose option [0 - 2]");
+			System.out.println("1 - Addition\n2 - Subtraction\n3 - Multiplication\n4 - Division\n0 - Exit");
+
+			System.out.println("Please choose option [0 - 4]");
 			int option = in.nextInt();
 
-			if(option < 0 || option > 2){
+			if(option < 0 || option > 4){
 				System.out.println("Invalid selection: " + Integer.toString(option) + "\nPlease try again!");
 				continue;
 			}
@@ -32,13 +33,29 @@ public class Calculator {
 				num2 = in.nextInt();
 				System.out.println("Result: " + Integer.toString(Calculator.add(num1, num2)));
 			}
-			else {
+			else if (option == 2) {
 				int num1, num2;
 				System.out.println("Please enter first number: ");
 				num1 = in.nextInt();
 				System.out.println("Please enter second number: ");
 				num2 = in.nextInt();
 				System.out.println("Result: " + Integer.toString(Calculator.subtract(num1, num2)));
+			}
+			else if (option == 3) {
+				int num1, num2;
+				System.out.println("Please enter first number: ");
+				num1 = in.nextInt();
+				System.out.println("Please enter second number: ");
+				num2 = in.nextInt();
+				System.out.println("Result: " + Long.toString(Calculator.multiply(num1, num2)));
+			}
+			else {
+				int num1, num2;
+				System.out.println("Please enter first number: ");
+				num1 = in.nextInt();
+				System.out.println("Please enter second number: ");
+				num2 = in.nextInt();
+				System.out.println("Result: " + Double.toString(Calculator.divide(num1, num2)));
 			}
 		}
 
@@ -52,17 +69,17 @@ public class Calculator {
 		return a - b;
 	}
 
-	// public static long multiply(int a, int b) {
-	// 	return a * b;
-	// }
-	//
-	// public static double divide(int a, int b) {
-	// 	double result;
-	// 	if (b == 0) {
-	// 		throw new IllegalArgumentException("Divisor cannot divide by zero");
-	// 	} else {
-	// 		result = Double.valueOf(a)/Double.valueOf(b);
-	// 	}
-	// 	return result;
-	// }
+	public static long multiply(int a, int b) {
+		return a * b;
+	}
+
+	public static double divide(int a, int b) {
+		double result;
+		if (b == 0) {
+			throw new IllegalArgumentException("Divisor cannot divide by zero");
+		} else {
+			result = Double.valueOf(a)/Double.valueOf(b);
+		}
+		return result;
+	}
 }
